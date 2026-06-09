@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merlette NYC — Copy Sample by The Silk Pen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── TOKENS ───────────────────────────────────────── */
+    :root {
+      --white:      #ffffff;
+      --off-white:  #fdfcfa;
+      --cream:      #faf8f4;
+      --linen:      #f2ede5;
+      --sand:       #e8e1d6;
+      --warm:       #d4cabb;
+      --clay:       #a89880;
+      --navy:       #1e2d40;
+      --ink:        #1a1a18;
+      --muted:      #7a7068;
+      --border:     #e8e3da;
+      --border-mid: #d8d3ca;
+      --marigold:   #c97d32;
+      --bougain:    #b84060;
+      --lotus:      #c0a898;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    a, button, input, p, h1, h2, h3, h4, span, div {
+      min-width: 0;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── ANNOUNCEMENT SLIDER ─────────────────────────── */
+    .announce-wrap {
+      background: var(--navy);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .announce-slides {
+      display: flex;
+      transition: transform 0.45s ease;
+    }
+
+    .announce-slide {
+      min-width: 100%;
+      text-align: center;
+      padding: 10px 48px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .announce-slide a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-left: 8px;
+    }
+
+    .announce-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.35);
+      cursor: pointer;
+      padding: 0 14px;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .announce-nav.prev { left: 0; }
+    .announce-nav.next { right: 0; }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+      position: relative;
+    }
+
+    .nav-left {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-left li { position: relative; }
+
+    .nav-left a {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.55;
+      transition: opacity 0.18s;
+    }
+
+    .nav-left a:hover { opacity: 1; }
+
+    /* The actual Merlette double-logo treatment */
+    .nav-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant', serif;
+      font-size: 21px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-logo .logo-secondary {
+      color: var(--marigold);
+      font-weight: 300;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      list-style: none;
+    }
+
+    .nav-right a {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.55;
+      transition: opacity 0.18s;
+    }
+
+    .nav-right a:hover { opacity: 1; }
+
+    /* ── HERO VIDEO AREA ────────────────────────────── */
+    .hero {
+      position: relative;
+      background: var(--linen);
+      overflow: hidden;
+    }
+
+    /* The live site is full-bleed video — we replicate as editorial image area */
+    .hero-media {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: linear-gradient(155deg, #e8e3d8 0%, #d8d0c4 35%, #c8bfb0 65%, #b8b0a4 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    /* Faint pattern to suggest fabric */
+    .hero-media::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.04) 40px,
+        rgba(255,255,255,0.04) 41px
+      );
+    }
+
+    .hero-media-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,26,24,0.55) 0%, transparent 45%);
+    }
+
+    .hero-bottom-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px 52px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: flex-end;
+      gap: 40px;
+    }
+
+    .hero-season-tag {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 14px;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 300;
+      line-height: 1.03;
+      color: #fff;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .hero-cta-col {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      max-width: 340px;
+      line-height: 1.75;
+      margin-bottom: 24px;
+      text-align: right;
+    }
+
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-white:hover { background: var(--cream); }
+
+    .btn-navy {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-navy:hover { background: #2a3d54; }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 12px 27px;
+      text-decoration: none;
+      border: 1px solid var(--border-mid);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover { border-color: var(--ink); }
+
+    /* ── SECTION UTILITIES ───────────────────────────── */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: 'Cormorant', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
+
+    .section-link {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-mid);
+      padding-bottom: 1px;
+      transition: color 0.18s, border-color 0.18s;
+    }
+
+    .section-link:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* ── PRODUCT CARDS — ACTUAL MERLETTE STYLE ────────── */
+    /* The live site has clean white cards, product name in
+       mixed case, the colour name below, price right, swatches below */
+    .products-section {
+      padding: 64px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .products-slider {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      cursor: pointer;
+    }
+
+    .product-img {
+      aspect-ratio: 3 / 4;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-img-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.55s ease;
+    }
+
+    .product-card:hover .product-img-bg { transform: scale(1.03); }
+
+    /* Real Merlette product colour tones */
+    .img-dune    { background: linear-gradient(160deg, #d8ceba 0%, #bfb09c 100%); }
+    .img-lime    { background: linear-gradient(160deg, #d4daa0 0%, #b0be6c 100%); }
+    .img-navy    { background: linear-gradient(160deg, #384c62 0%, #1e2d40 100%); }
+    .img-white   { background: linear-gradient(160deg, #f0edea 0%, #ddd8d2 100%); }
+    .img-marig   { background: linear-gradient(160deg, #d4884c 0%, #b06428 100%); }
+    .img-skye    { background: linear-gradient(160deg, #a8c0d0 0%, #7898ae 100%); }
+    .img-bvl     { background: linear-gradient(160deg, #c45070 0%, #943050 100%); }
+    .img-lotus   { background: linear-gradient(160deg, #c8b0a8 0%, #a89080 100%); }
+    .img-ecru    { background: linear-gradient(160deg, #ede8de 0%, #d4cfc4 100%); }
+
+    /* Badge: "Back In Stock", "Exclusively Ours" */
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--white);
+      color: var(--ink);
+      padding: 4px 9px;
+      opacity: 0.9;
+    }
+
+    .badge-sale    { background: var(--marigold); color: var(--white); }
+    .badge-excl    { background: var(--navy); color: var(--white); }
+    .badge-back    { background: var(--white); color: var(--ink); }
+
+    /* Quick add button — appears on hover, mirrors live site */
+    .product-quick-add {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-align: center;
+      padding: 12px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.22s, transform 0.22s;
+      border-top: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .product-card:hover .product-quick-add {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-info {}
+
+    /* Merlette's actual product name style: mixed-case Jost */
+    .product-name {
+      font-family: 'Jost', sans-serif;
+      font-size: 12.5px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 3px;
+      letter-spacing: 0.01em;
+    }
+
+    .product-colorname {
+      font-family: 'Jost', sans-serif;
+      font-size: 11.5px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .product-price {
+      font-family: 'Jost', sans-serif;
+      font-size: 12.5px;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .product-price .was {
+      color: var(--clay);
+      text-decoration: line-through;
+      margin-right: 6px;
+    }
+
+    .product-price .sale-p { color: var(--marigold); }
+
+    /* Colour swatches — key Merlette UI element */
+    .product-swatches {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid rgba(26,26,24,0.12);
+      cursor: pointer;
+      transition: transform 0.15s;
+      position: relative;
+    }
+
+    .swatch:hover { transform: scale(1.2); }
+    .swatch.active::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1.5px solid var(--ink);
+    }
+
+    .sw-dune    { background: #bfb09c; }
+    .sw-lime    { background: #b8c460; }
+    .sw-navy    { background: #1e2d40; }
+    .sw-white   { background: #f4f2ee; }
+    .sw-marig   { background: #c97d32; }
+    .sw-skye    { background: #7898ae; }
+    .sw-bvl     { background: #943050; }
+    .sw-lotus   { background: #a89080; }
+    .sw-ecru    { background: #d4cfc4; }
+    .sw-black   { background: #1a1a18; }
+    .sw-wash    { background: #6882a0; }
+
+    /* ── INDIA / COLLECTION STORY ────────────────────── */
+    .story-section {
+      background: var(--navy);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .story-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 540px;
+    }
+
+    .story-text {
+      padding: 88px 72px 88px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .story-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--marigold);
+      margin-bottom: 24px;
+    }
+
+    .story-headline {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+
+    .story-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.48);
+      margin-bottom: 20px;
+    }
+
+    .story-link {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--marigold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--marigold);
+      padding-bottom: 2px;
+      align-self: flex-start;
+      margin-top: 12px;
+      transition: opacity 0.18s;
+    }
+
+    .story-link:hover { opacity: 0.7; }
+
+    .story-visual {
+      position: relative;
+      overflow: hidden;
+      background: #2a3d52;
+    }
+
+    .story-visual-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2e4258 0%, #1e2d40 60%, #161e2b 100%);
+    }
+
+    /* Fabric/embroidery motif */
+    .story-motif {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .motif-circle {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      position: absolute;
+    }
+
+    .motif-circle-2 {
+      width: 180px;
+      height: 180px;
+      border: 1px solid rgba(201,125,50,0.15);
+    }
+
+    .motif-circle-3 {
+      width: 360px;
+      height: 360px;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    /* Colour palette dots — references the Marigold, Bougainvillea, Lotus, Skye palette */
+    .palette-row {
+      position: absolute;
+      bottom: 48px;
+      left: 40px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .palette-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .palette-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .story-pillars {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 180px;
+    }
+
+    .story-pillar {
+      border-left: 1px solid rgba(255,255,255,0.1);
+      padding-left: 14px;
+    }
+
+    .sp-title {
+      font-family: 'Jost', sans-serif;
+      font-size: 9.5px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 4px;
+    }
+
+    .sp-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.22);
+    }
+
+    /* ── EDITORIAL EDITS GRID ────────────────────────── */
+    /* Mirrors the live site's "Best of Sale / Citrus Tones / For the Bride" strip */
+    .edits-section {
+      padding: 64px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .edits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .edit-card {
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .edit-img {
+      aspect-ratio: 3 / 4;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .edit-img-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.55s ease;
+    }
+
+    .edit-card:hover .edit-img-bg { transform: scale(1.04); }
+
+    .edit-bg-1 { background: linear-gradient(160deg, #e8d8b8 0%, #c4aa80 100%); }  /* Best of Sale – warm gold */
+    .edit-bg-2 { background: linear-gradient(160deg, #d4d880 0%, #a8b840 100%); }  /* Citrus Tones – lime */
+    .edit-bg-3 { background: linear-gradient(160deg, #f0eae0 0%, #ddd2c4 100%); }  /* For the Bride – ivory */
+    .edit-bg-4 { background: linear-gradient(160deg, #b4c8d8 0%, #8098b0 100%); }  /* Spring Campaign – skye */
+
+    .edit-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,26,24,0.5) 0%, transparent 50%);
+    }
+
+    .edit-label {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+    }
+
+    .edit-title {
+      font-family: 'Cormorant', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .edit-cta {
+      font-family: 'Jost', sans-serif;
+      font-size: 9.5px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.35);
+      padding-bottom: 1px;
+    }
+
+    /* ── FOUNDER SECTION ──────────────────────────────── */
+    .founder-section {
+      display: grid;
+      grid-template-columns: 5fr 6fr;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .founder-img {
+      background: var(--linen);
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+    }
+
+    .founder-img-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(150deg, #ede7dc 0%, #d8d0c4 50%, #c4bab0 100%);
+    }
+
+    /* Subtle garment texture suggestion */
+    .founder-img-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 18px,
+        rgba(255,255,255,0.04) 18px,
+        rgba(255,255,255,0.04) 19px
+      );
+    }
+
+    .founder-img-tag {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+      font-family: 'Cormorant', serif;
+      font-style: italic;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(26,26,24,0.4);
+    }
+
+    .founder-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px;
+      border-left: 1px solid var(--border);
+    }
+
+    .founder-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 24px;
+    }
+
+    .founder-quote {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(22px, 2.6vw, 34px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.38;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    .founder-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .founder-body strong {
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .founder-name {
+      margin-top: 8px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+
+    /* ── CRAFT STRIP ──────────────────────────────────── */
+    .craft-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .craft-item {
+      padding: 52px 44px;
+      border-right: 1px solid var(--border);
+    }
+
+    .craft-item:last-child { border-right: none; }
+
+    .craft-num {
+      font-family: 'Cormorant', serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--warm);
+      margin-bottom: 20px;
+    }
+
+    .craft-title {
+      font-family: 'Cormorant', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .craft-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15.5px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    /* ── BESTSELLERS SECTION ─────────────────────────── */
+    .bestsellers-section {
+      padding: 64px 40px;
+      border-bottom: 1px solid var(--border);
+      background: var(--off-white);
+    }
+
+    /* ── NEWSLETTER ───────────────────────────────────── */
+    .newsletter {
+      background: var(--cream);
+      padding: 96px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nl-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 20px;
+    }
+
+    .nl-headline {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .nl-headline em {
+      font-style: italic;
+      color: var(--clay);
+    }
+
+    .nl-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .nl-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nl-row {
+      display: flex;
+      gap: 0;
+    }
+
+    .nl-input {
+      flex: 1;
+      background: var(--white);
+      border: 1px solid var(--border-mid);
+      border-right: none;
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      font-weight: 300;
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .nl-input::placeholder { color: var(--warm); }
+    .nl-input:focus { border-color: var(--navy); }
+
+    .nl-btn {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 14px 22px;
+      border: 1px solid var(--navy);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .nl-btn:hover { background: #2a3d54; }
+
+    .nl-note {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--warm);
+      line-height: 1.65;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── COPY NOTES ───────────────────────────────────── */
+    .copy-notes {
+      padding: 80px;
+      border-top: 2.5px solid var(--navy);
+      background: var(--linen);
+    }
+
+    .notes-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 52px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .notes-badge {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+
+    .notes-title {
+      font-family: 'Cormorant', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .notes-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--clay);
+      margin-left: auto;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 64px;
+    }
+
+    .note-item h4 {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .note-item p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    /* ── BEFORE / AFTER ───────────────────────────────── */
+    .before-after {
+      padding: 0 80px 80px;
+      background: var(--linen);
+    }
+
+    .ba-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 20px;
+      padding-top: 4px;
+    }
+
+    .ba-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .ba-card {
+      padding: 28px 32px;
+      border: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .ba-tag {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      margin-bottom: 16px;
+    }
+
+    .ba-tag.before { background: var(--sand); color: var(--clay); }
+    .ba-tag.after  { background: var(--navy); color: var(--white); }
+
+    .ba-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--ink);
+    }
+
+    .ba-note {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--clay);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 64px 40px 32px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-brand-col {}
+
+    .footer-logo {
+      font-family: 'Cormorant', serif;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 220px;
+    }
+
+    .footer-nl-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+
+    .footer-nl-row {
+      display: flex;
+    }
+
+    .footer-nl-input {
+      flex: 1;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-right: none;
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      padding: 9px 12px;
+      outline: none;
+    }
+
+    .footer-nl-input::placeholder { color: var(--warm); }
+
+    .footer-nl-btn {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 9px 14px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .footer-col-head {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .footer-links a {
+      font-family: 'Jost', sans-serif;
+      font-size: 12.5px;
+      font-weight: 300;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+
+    .footer-links a:hover { color: var(--ink); }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-legal {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--warm);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-silk-pen {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--clay);
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 1060px) {
+      .products-slider { grid-template-columns: repeat(2, 1fr); }
+      .edits-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .nav-inner { padding: 0 20px; }
+      .nav-left  { display: none; }
+      .nav-logo  { position: static; transform: none; }
+      .hero-media { aspect-ratio: 4/3; }
+      .hero-bottom-content { grid-template-columns: 1fr; gap: 20px; }
+      .hero-cta-col { text-align: left; }
+      .hero-sub { text-align: left; }
+      .story-inner { grid-template-columns: 1fr; }
+      .story-visual { min-height: 240px; }
+      .story-text { padding: 64px 24px; }
+      .founder-section { grid-template-columns: 1fr; }
+      .founder-img { min-height: 50vw; }
+      .founder-content { padding: 48px 24px; border-left: none; border-top: 1px solid var(--border); }
+      .craft-strip { grid-template-columns: 1fr; }
+      .craft-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .newsletter { grid-template-columns: 1fr; padding: 64px 24px; gap: 40px; }
+      .copy-notes { padding: 48px 24px; }
+      .notes-grid { grid-template-columns: 1fr; gap: 32px; }
+      .before-after { padding: 0 24px 48px; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .products-section,
+      .edits-section,
+      .bestsellers-section { padding: 48px 20px; }
+    }
+
+    @media (max-width: 540px) {
+      body {
+        font-size: 13px;
+      }
+
+      .announce-slide {
+        padding: 9px 42px;
+        font-size: 9.5px;
+        line-height: 1.55;
+        letter-spacing: 0.08em;
+      }
+
+      .announce-nav {
+        padding: 0 12px;
+      }
+
+      .nav-inner {
+        height: auto;
+        min-height: 58px;
+        padding: 14px 20px;
+        gap: 14px;
+      }
+
+      .nav-logo {
+        font-size: 20px;
+        letter-spacing: 0.13em;
+      }
+
+      .nav-right {
+        gap: 14px;
+      }
+
+      .nav-right a {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+      }
+
+      .nav-right li:first-child {
+        display: none;
+      }
+
+      .hero-media {
+        aspect-ratio: auto;
+        min-height: 620px;
+      }
+
+      .hero-bottom-content {
+        padding: 0 22px 38px;
+        gap: 22px;
+      }
+
+      .hero-season-tag,
+      .story-eyebrow,
+      .founder-label,
+      .nl-label,
+      .notes-badge,
+      .ba-label,
+      .footer-nl-label,
+      .footer-col-head {
+        font-size: 9.5px;
+        line-height: 1.5;
+        letter-spacing: 0.16em;
+      }
+
+      .hero-season-tag {
+        margin-bottom: 12px;
+      }
+
+      .hero-headline {
+        font-size: clamp(40px, 13vw, 52px);
+        line-height: 1.03;
+        text-wrap: balance;
+      }
+
+      .hero-headline br,
+      .story-headline br,
+      .nl-headline br {
+        display: none;
+      }
+
+      .hero-sub {
+        max-width: none;
+        font-size: 17px;
+        line-height: 1.65;
+        margin-bottom: 22px;
+      }
+
+      .btn-white,
+      .btn-navy,
+      .btn-outline {
+        width: 100%;
+        padding: 13px 18px;
+        text-align: center;
+        line-height: 1.45;
+        letter-spacing: 0.16em;
+      }
+
+      .section-head {
+        margin-bottom: 24px;
+        padding-bottom: 14px;
+      }
+
+      .section-title {
+        font-size: 22px;
+      }
+
+      .section-link {
+        font-size: 9.5px;
+        letter-spacing: 0.14em;
+        white-space: nowrap;
+      }
+
+      .products-section,
+      .edits-section,
+      .bestsellers-section {
+        padding: 44px 22px;
+      }
+
+      .products-slider {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .product-img {
+        aspect-ratio: 4 / 5;
+      }
+
+      .product-badge {
+        max-width: calc(100% - 24px);
+        line-height: 1.4;
+      }
+
+      .product-quick-add {
+        opacity: 1;
+        transform: none;
+      }
+
+      .product-name,
+      .product-price {
+        font-size: 13px;
+      }
+
+      .product-colorname {
+        font-size: 12px;
+      }
+
+      .story-text {
+        padding: 54px 22px;
+      }
+
+      .story-headline {
+        font-size: clamp(32px, 10vw, 42px);
+        line-height: 1.12;
+        text-wrap: balance;
+      }
+
+      .story-body,
+      .founder-body,
+      .nl-body,
+      .note-item p {
+        font-size: 16.5px;
+        line-height: 1.72;
+      }
+
+      .story-visual {
+        min-height: 360px;
+      }
+
+      .story-pillars {
+        top: 28px;
+        right: 22px;
+        left: 22px;
+        width: auto;
+        gap: 14px;
+      }
+
+      .sp-text {
+        font-size: 12.5px;
+        line-height: 1.55;
+      }
+
+      .palette-row {
+        left: 22px;
+        right: 22px;
+        bottom: 24px;
+        flex-wrap: wrap;
+      }
+
+      .motif-circle {
+        width: 210px;
+        height: 210px;
+      }
+
+      .motif-circle-2 {
+        width: 150px;
+        height: 150px;
+      }
+
+      .motif-circle-3 {
+        width: 300px;
+        height: 300px;
+      }
+
+      .edits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .edit-img {
+        aspect-ratio: 4 / 5;
+      }
+
+      .edit-title {
+        font-size: 24px;
+      }
+
+      .founder-img {
+        min-height: 320px;
+      }
+
+      .founder-img-tag {
+        left: 22px;
+        bottom: 22px;
+      }
+
+      .founder-content {
+        padding: 48px 22px;
+      }
+
+      .founder-quote {
+        font-size: clamp(27px, 8vw, 34px);
+        line-height: 1.25;
+        text-wrap: balance;
+      }
+
+      .founder-name {
+        line-height: 1.6;
+      }
+
+      .craft-item {
+        padding: 42px 22px;
+      }
+
+      .craft-title {
+        font-size: 24px;
+      }
+
+      .craft-body {
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .newsletter {
+        padding: 54px 22px;
+        gap: 32px;
+      }
+
+      .nl-headline {
+        font-size: clamp(31px, 9vw, 40px);
+        line-height: 1.12;
+        text-wrap: balance;
+      }
+
+      .nl-row {
+        flex-direction: column;
+      }
+
+      .nl-input {
+        width: 100%;
+        border-right: 1px solid var(--border-mid);
+        border-bottom: none;
+        font-size: 16px;
+      }
+
+      .nl-btn {
+        width: 100%;
+        padding: 14px 18px;
+        line-height: 1.45;
+        letter-spacing: 0.16em;
+      }
+
+      .copy-notes {
+        padding: 48px 22px;
+      }
+
+      .notes-header {
+        display: block;
+        margin-bottom: 34px;
+        padding-bottom: 20px;
+      }
+
+      .notes-title {
+        display: block;
+        font-size: 29px;
+        line-height: 1.15;
+        margin-top: 8px;
+      }
+
+      .notes-sub {
+        display: block;
+        margin: 8px 0 0;
+      }
+
+      .notes-grid {
+        gap: 30px;
+      }
+
+      .note-item h4 {
+        line-height: 1.5;
+        letter-spacing: 0.14em;
+      }
+
+      .before-after {
+        padding: 0 22px 48px;
+      }
+
+      .ba-grid {
+        gap: 16px;
+      }
+
+      .ba-card {
+        padding: 24px 20px;
+      }
+
+      .ba-tag {
+        line-height: 1.45;
+        letter-spacing: 0.14em;
+      }
+
+      .ba-text {
+        font-size: 16.5px;
+        line-height: 1.68;
+      }
+
+      .ba-note {
+        font-size: 11px;
+        line-height: 1.6;
+      }
+
+      footer {
+        padding: 52px 22px 30px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-bottom: 36px;
+      }
+
+      .footer-tagline {
+        max-width: none;
+      }
+
+      .footer-nl-row {
+        flex-direction: column;
+      }
+
+      .footer-nl-input {
+        width: 100%;
+        border-right: 1px solid var(--border);
+        border-bottom: none;
+        font-size: 15px;
+      }
+
+      .footer-nl-btn {
+        width: 100%;
+        padding: 11px 14px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .footer-legal,
+      .footer-silk-pen {
+        line-height: 1.6;
+        overflow-wrap: anywhere;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .nav-inner {
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 10px;
+      }
+
+      .nav-logo {
+        order: 1;
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-right {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero-headline {
+        font-size: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR — mirrors the Merlette dual-slide announcer -->
+  <div class="announce-wrap">
+    <button class="announce-nav prev" onclick="slide(-1)">‹</button>
+    <div class="announce-slides" id="announceSlides">
+      <div class="announce-slide">
+        Collection 23 is here. A love letter to India, ten years in the making.
+        <a href="#">Shop Spring 2026 →</a>
+      </div>
+      <div class="announce-slide">
+        Sale: 40% off Collection 22 — while it lasts.
+        <a href="#">Shop Sale →</a>
+      </div>
+    </div>
+    <button class="announce-nav next" onclick="slide(1)">›</button>
+  </div>
+
+  <!-- NAV — mirrors live site exactly: left links, centred Merlette logo, right icons -->
+  <nav>
+    <div class="nav-inner">
+      <ul class="nav-left">
+        <li><a href="#">New In</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Spring 2026</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+      <a href="#" class="nav-logo">Merlette</a>
+      <ul class="nav-right">
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Search</a></li>
+        <li><a href="#">Cart (0)</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO — full-bleed editorial, mirrors the video hero on live site -->
+  <section class="hero">
+    <div class="hero-media">
+      <div class="hero-media-overlay"></div>
+      <div class="hero-bottom-content">
+        <div>
+          <div class="hero-season-tag">Spring 2026 · Collection 23</div>
+          <h1 class="hero-headline">
+            Designed for<br>
+            freedom.<br>
+            <em>Made to last.</em>
+          </h1>
+        </div>
+        <div class="hero-cta-col">
+          <p class="hero-sub">
+            Marina Cortbawi left the most structured houses in fashion
+            to make something freer. Clothes that feel like yours from the first wear.
+          </p>
+          <a href="#" class="btn-white">Shop Collection 23</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW ARRIVALS — mirrors the actual homepage section heading and card grid -->
+  <section class="products-section">
+    <div class="section-head">
+      <h2 class="section-title">New Arrivals</h2>
+      <a href="#" class="section-link">View All</a>
+    </div>
+    <div class="products-slider">
+
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg img-dune"></div>
+          <span class="product-badge badge-back">Back In Stock</span>
+          <div class="product-quick-add">Choose Options</div>
+        </div>
+        <div class="product-name">Verena Dress</div>
+        <div class="product-colorname">Dune</div>
+        <div class="product-price">$680</div>
+        <div class="product-swatches">
+          <div class="swatch sw-dune active" title="Dune"></div>
+          <div class="swatch sw-navy" title="Navy"></div>
+          <div class="swatch sw-black" title="Black"></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg img-lime"></div>
+          <div class="product-quick-add">Choose Options</div>
+        </div>
+        <div class="product-name">Saaz Top</div>
+        <div class="product-colorname">Lime Floral Print</div>
+        <div class="product-price">$395</div>
+        <div class="product-swatches">
+          <div class="swatch sw-lime active" title="Lime Floral Print"></div>
+          <div class="swatch sw-black" title="Black"></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg img-marig"></div>
+          <div class="product-quick-add">Choose Options</div>
+        </div>
+        <div class="product-name">Rohilla Dress</div>
+        <div class="product-colorname">Marigold</div>
+        <div class="product-price">$495</div>
+        <div class="product-swatches">
+          <div class="swatch sw-marig active" title="Marigold"></div>
+          <div class="swatch sw-navy" title="Navy"></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg img-skye"></div>
+          <div class="product-quick-add">Choose Options</div>
+        </div>
+        <div class="product-name">Caron Dress</div>
+        <div class="product-colorname">Skye</div>
+        <div class="product-price">$520</div>
+        <div class="product-swatches">
+          <div class="swatch sw-skye active" title="Skye"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INDIA STORY — editorial dark section -->
+  <section class="story-section">
+    <div class="story-inner">
+      <div class="story-text">
+        <p class="story-eyebrow">Collection 23 · Spring 2026</p>
+        <h2 class="story-headline">
+          Ten years ago, India gave us<br>
+          our first fabric. This collection<br>
+          gives it back everything.
+        </h2>
+        <p class="story-body">
+          Our 23rd collection is a love letter to the country that has been part of
+          Merlette since the beginning. The artisans in Rajasthan who bring every
+          embroidery to life by hand. The handloom weavers whose techniques use
+          90% less water than mill production. The women whose skill is in every
+          piece we make.
+        </p>
+        <p class="story-body">
+          Collection 23 celebrates ten years of that relationship. Marigold,
+          lotus and bougainvillea. The spirit of Rajasthan seen through
+          the lens of a 70s editorial dream.
+        </p>
+        <a href="#" class="story-link">Explore the Collection</a>
+      </div>
+      <div class="story-visual">
+        <div class="story-visual-bg"></div>
+        <div class="story-motif">
+          <div class="motif-circle"></div>
+          <div class="motif-circle motif-circle-2"></div>
+          <div class="motif-circle motif-circle-3"></div>
+        </div>
+        <div class="story-pillars">
+          <div class="story-pillar">
+            <div class="sp-title">The Fabric</div>
+            <p class="sp-text">Over 70% Pima cotton, OEKO-TEX certified. Custom each season.</p>
+          </div>
+          <div class="story-pillar">
+            <div class="sp-title">The Craft</div>
+            <p class="sp-text">Bespoke hand embroidery and smocking by artisans in India, Turkey and Peru.</p>
+          </div>
+          <div class="story-pillar">
+            <div class="sp-title">The Standard</div>
+            <p class="sp-text">No virgin poly bags. Compostable flatpack from Pre-Spring 2025.</p>
+          </div>
+        </div>
+        <div class="palette-row">
+          <div class="palette-dot" style="background:#c97d32"></div>
+          <div class="palette-dot" style="background:#943050"></div>
+          <div class="palette-dot" style="background:#a89080"></div>
+          <div class="palette-dot" style="background:#7898ae"></div>
+          <span class="palette-label">Sp 26 Palette</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITORIAL EDITS — mirrors "Best of Sale / Citrus Tones / For the Bride / Spring Campaign" -->
+  <section class="edits-section">
+    <div class="section-head">
+      <h2 class="section-title">Explore</h2>
+    </div>
+    <div class="edits-grid">
+      <div class="edit-card">
+        <div class="edit-img">
+          <div class="edit-img-bg edit-bg-1"></div>
+          <div class="edit-overlay"></div>
+          <div class="edit-label">
+            <div class="edit-title">Best of Sale</div>
+            <a href="#" class="edit-cta">Shop Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="edit-card">
+        <div class="edit-img">
+          <div class="edit-img-bg edit-bg-2"></div>
+          <div class="edit-overlay"></div>
+          <div class="edit-label">
+            <div class="edit-title">Citrus Tones</div>
+            <a href="#" class="edit-cta">Shop Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="edit-card">
+        <div class="edit-img">
+          <div class="edit-img-bg edit-bg-3"></div>
+          <div class="edit-overlay"></div>
+          <div class="edit-label">
+            <div class="edit-title">For the Bride</div>
+            <a href="#" class="edit-cta">Shop Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="edit-card">
+        <div class="edit-img">
+          <div class="edit-img-bg edit-bg-4"></div>
+          <div class="edit-overlay"></div>
+          <div class="edit-label">
+            <div class="edit-title">Spring Campaign</div>
+            <a href="#" class="edit-cta">View Lookbook</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER SECTION -->
+  <section class="founder-section">
+    <div class="founder-img">
+      <div class="founder-img-bg"></div>
+      <div class="founder-img-tag">Marina Cortbawi, Founder</div>
+    </div>
+    <div class="founder-content">
+      <p class="founder-label">On designing for freedom</p>
+      <p class="founder-quote">
+        "I design for freedom. Which I also happened to be craving in my own life."
+      </p>
+      <p class="founder-body">
+        Marina spent years in structured fashion. International sales at Oscar de la Renta.
+        Director at Carolina Herrera. She knew how clothes were made and who they were made for.
+        She also knew something was missing: <strong>clothes that made women feel at ease,
+        not just dressed.</strong>
+      </p>
+      <p class="founder-body">
+        Merlette began in 2016 with that idea. A New York atelier making garments
+        that feel elegant without effort. That you keep coming back to not because
+        they are trendy but because they make you feel like yourself.
+      </p>
+      <div class="founder-name">Marina Cortbawi · Brooklyn, New York</div>
+    </div>
+  </section>
+
+  <!-- CRAFT STRIP -->
+  <div class="craft-strip">
+    <div class="craft-item">
+      <div class="craft-num">01</div>
+      <div class="craft-title">Natural, Always</div>
+      <p class="craft-body">Luxurious cottons, airy silks, versatile wools. No synthetics unless naturally derived. Quality over quantity, every season.</p>
+    </div>
+    <div class="craft-item">
+      <div class="craft-num">02</div>
+      <div class="craft-title">Artisan-Made</div>
+      <p class="craft-body">Every embroidery is made by hand. Every smocked detail is placed with intention. These are not decorations. They are the work.</p>
+    </div>
+    <div class="craft-item">
+      <div class="craft-num">03</div>
+      <div class="craft-title">Built to Last</div>
+      <p class="craft-body">Hand-washable. Wrinkle-resistant. Designed to be worn once a week and loved for years. The opposite of disposable.</p>
+    </div>
+  </div>
+
+  <!-- BESTSELLERS -->
+  <section class="bestsellers-section">
+    <div class="section-head">
+      <h2 class="section-title">Bestsellers</h2>
+      <a href="#" class="section-link">View All</a>
+    </div>
+    <div class="products-slider">
+
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg img-white"></div>
+          <div class="product-quick-add">Choose Options</div>
+        </div>
+        <div class="product-name">Majorelle Top</div>
+        <div class="product-colorname">White</div>
+        <div class="product-price">$440</div>
+        <div class="product-swatches">
+          <div class="swatch sw-white active" title="White"></div>
+          <div class="swatch sw-black" title="Black"></div>
+          <div class="swatch sw-navy" title="Navy"></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg img-dune"></div>
+          <span class="product-badge badge-back">Back In Stock</span>
+          <div class="product-quick-add">Choose Options</div>
+        </div>
+        <div class="product-name">Verena Dress</div>
+        <div class="product-colorname">Dune</div>
+        <div class="product-price">$680</div>
+        <div class="product-swatches">
+          <div class="swatch sw-dune active" title="Dune"></div>
+          <div class="swatch sw-navy" title="Navy"></div>
+          <div class="swatch sw-black" title="Black"></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg img-marig"></div>
+          <span class="product-badge badge-excl">Exclusively Ours</span>
+          <div class="product-quick-add">Choose Options</div>
+        </div>
+        <div class="product-name">Caron Dress</div>
+        <div class="product-colorname">Marigold</div>
+        <div class="product-price">$520</div>
+        <div class="product-swatches">
+          <div class="swatch sw-marig active" title="Marigold"></div>
+          <div class="swatch sw-lime" title="Lime"></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg img-ecru"></div>
+          <div class="product-quick-add">Choose Options</div>
+        </div>
+        <div class="product-name">Rhea Jacket</div>
+        <div class="product-colorname">Ecru</div>
+        <div class="product-price">$520</div>
+        <div class="product-swatches">
+          <div class="swatch sw-ecru active" title="Ecru"></div>
+          <div class="swatch sw-wash" title="Mid-Blue Wash"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="nl-left">
+      <p class="nl-label">Stay close to Merlette</p>
+      <h2 class="nl-headline">
+        New collections.<br>
+        <em>Stories worth reading.</em>
+      </h2>
+      <p class="nl-body">
+        Each season Marina writes about where the collection came from,
+        who made it, and what she was thinking. New arrivals, journal stories,
+        and the occasional note from the atelier. Written for the women
+        who want to know more than just what to wear.
+      </p>
+    </div>
+    <div class="nl-form">
+      <div class="nl-row">
+        <input class="nl-input" type="email" placeholder="Your email address">
+        <button class="nl-btn">Join the Atelier</button>
+      </div>
+      <p class="nl-note">
+        New collections and stories, nothing else. Unsubscribe whenever you like.
+      </p>
+    </div>
+  </section>
+
+  <!-- COPY NOTES -->
+  <section class="copy-notes">
+    <div class="notes-header">
+      <div class="notes-badge">The Silk Pen</div>
+      <div class="notes-title">Copywriter's Notes</div>
+      <div class="notes-sub">What changed and why</div>
+    </div>
+    <div class="notes-grid">
+      <div class="note-item">
+        <h4>The Hero</h4>
+        <p>
+          The live Merlette homepage hero is a full-bleed video with "Spring 2026"
+          as the only text and a Shop Now button beneath it. There is no brand voice,
+          no story, nothing that explains why a first-time visitor should care.
+          Marina's own words — "I design for freedom. Which I also happened to be
+          craving in my own life" — are far more powerful than anything currently
+          on the site. This rewrite puts the founding belief on the page where it
+          can do the work it deserves, without disrupting the visual-first layout.
+        </p>
+      </div>
+      <div class="note-item">
+        <h4>The India Section</h4>
+        <p>
+          The Spring 2026 collection description sits in a video caption on the live
+          site. "A love letter to India, the birthplace of our fabrics, the home of
+          the artisans who bring every embroidery to life" is an extraordinary piece
+          of brand storytelling that most visitors will never read. Merlette's 10th
+          anniversary and the India relationship are the most compelling story the
+          brand has right now. This rewrite gives it a full editorial section —
+          matching the dark, immersive tone of the live site's video treatment —
+          and earns its weight as conversion copy.
+        </p>
+      </div>
+      <div class="note-item">
+        <h4>The Founder Section</h4>
+        <p>
+          The live About page describes Marina entirely in the third person in press-release
+          language. Marina's actual voice, from interviews, is warm, direct, and specific.
+          This rewrite brings her forward in the first person and tells the story
+          that the About page buries: she came from the most structured houses in
+          fashion — Oscar de la Renta, Carolina Herrera — and left to make
+          something freer. That contrast is what Merlette is. A visitor who
+          understands that story buys differently.
+        </p>
+      </div>
+      <div class="note-item">
+        <h4>The Newsletter Capture</h4>
+        <p>
+          "Sign up to receive news and special offers" is the current newsletter copy
+          on the live site footer. For a brand whose 23rd collection is described as
+          a love letter to India, whose founder writes a travel guide in the Journal,
+          and whose artisan relationships span three continents, "news and special offers"
+          is a profound mismatch. "Written for the women who want to know more than
+          just what to wear" is the promise the brand already keeps in its Journal.
+          The newsletter copy should say so.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <div class="before-after">
+    <div class="ba-label">Before and After: The Hero</div>
+    <div class="ba-grid">
+      <div class="ba-card">
+        <span class="ba-tag before">Live copy</span>
+        <p class="ba-text">"Spring 2026. Shop Now."</p>
+        <div class="ba-note">
+          A season label and a CTA. No brand voice, no story, no reason
+          for a first-time visitor to feel anything before being asked to shop.
+        </div>
+      </div>
+      <div class="ba-card">
+        <span class="ba-tag after">Rewrite</span>
+        <p class="ba-text">
+          "Designed for freedom. Made to last. Marina Cortbawi left Carolina Herrera
+          and Oscar de la Renta to make something different. Clothes that move with you.
+          That feel like yours from the first wear."
+        </p>
+        <div class="ba-note">
+          Leads with Marina's founding belief, told through her own story.
+          The visitor understands the brand before they are asked to buy anything.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER — mirrors live site's 4-column structure exactly -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand-col">
+        <div class="footer-logo">Merlette</div>
+        <p class="footer-tagline">
+          Thoughtfully designed clothing for modern women. Made to be worn, washed, worn again.
+        </p>
+        <p class="footer-nl-label">Stay in touch</p>
+        <div class="footer-nl-row">
+          <input class="footer-nl-input" type="email" placeholder="Email address">
+          <button class="footer-nl-btn">Join</button>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-head">Explore</p>
+        <ul class="footer-links">
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Signature Styles</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Lookbook</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-head">Merlette</p>
+        <ul class="footer-links">
+          <li><a href="#">Merlette Tribeca</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Garment Care</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-head">Online Services</p>
+        <ul class="footer-links">
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping &amp; Returns</a></li>
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">Privacy Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-legal">© 2026 Merlette</span>
+      <span class="footer-silk-pen">Copy sample by The Silk Pen</span>
+    </div>
+  </footer>
+
+  <script>
+    // Announcement slider
+    let cur = 0;
+    const slides = document.querySelectorAll('.announce-slide');
+    function slide(dir) {
+      cur = (cur + dir + slides.length) % slides.length;
+      document.getElementById('announceSlides').style.transform = `translateX(-${cur * 100}%)`;
+    }
+    setInterval(() => slide(1), 4200);
+  </script>
+
+</body>
+</html>
